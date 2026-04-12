@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: rgb-studio-server
+    runtime: node
+    rootDir: server
+    buildCommand: npm install && npx prisma generate --schema=prisma/schema.prisma && npm run build
+    startCommand: node dist/src/main
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: CLIENT_URL
+        sync: false
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"

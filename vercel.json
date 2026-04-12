@@ -1,0 +1,12 @@
+{
+  "buildCommand": "cd client && npm install && npm run build",
+  "outputDirectory": "client/.next",
+  "installCommand": "cd client && npm install",
+  "framework": "nextjs",
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://rgb-studio-server.onrender.com/api/:path*"
+    }
+  ]
+}
