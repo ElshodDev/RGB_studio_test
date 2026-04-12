@@ -9,8 +9,8 @@ async function bootstrap() {
     origin: [
       'http://localhost:3001',
       'http://localhost:3000',
-      process.env.CLIENT_URL ?? '',
-    ].filter(Boolean),
+      process.env.CLIENT_URL,
+    ].filter((o): o is string => !!o),
     credentials: true,
   });
   
