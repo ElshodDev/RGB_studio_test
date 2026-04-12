@@ -6,7 +6,7 @@ import { JwtAuthGuard } from './jwt-auth.guard';
 
 interface RequestWithUser extends Request {
   user: {
-    userId: string;
+    id: string;
     email: string;
     role: string;
   };
@@ -29,6 +29,6 @@ export class AuthController {
   @UseGuards(JwtAuthGuard)
   @Get('me')
   async getMe(@Req() req: RequestWithUser) {
-    return this.authService.getMe(req.user.userId);
+    return this.authService.getMe(req.user.id);
   }
 }
