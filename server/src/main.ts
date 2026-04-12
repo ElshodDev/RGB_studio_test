@@ -9,6 +9,8 @@ async function bootstrap() {
     origin: [
       'http://localhost:3001',
       'http://localhost:3000',
+      'https://rgb-studio-test-p92tzqw56-elshodibadullayev28-7531s-projects.vercel.app',
+      'https://rgb-studio.vercel.app',
       process.env.CLIENT_URL,
     ].filter((o): o is string => !!o),
     credentials: true,
