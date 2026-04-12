@@ -44,16 +44,16 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md">
+    <div className="flex min-h-screen items-center justify-center bg-[radial-gradient(circle_at_20%_10%,#7a57ff_0%,#2f135f_35%,#090b14_80%)] px-4">
+      <Card className="w-full max-w-md border-white/20 bg-black/40 text-white backdrop-blur">
         <CardHeader>
-          <CardTitle className="text-2xl text-center">RGB Studio CRM</CardTitle>
-          <CardDescription className="text-center">Sign in to your account</CardDescription>
+          <CardTitle className="text-center text-2xl">Welcome back</CardTitle>
+          <CardDescription className="text-center text-white/70">Sign in to continue to Zodier</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             {error && (
-              <div className="bg-red-50 text-red-600 text-sm px-4 py-2 rounded-md border border-red-200">
+              <div className="rounded-md border border-red-500/40 bg-red-500/15 px-4 py-2 text-sm text-red-200">
                 {error}
               </div>
             )}
@@ -67,6 +67,7 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={isLoading}
+                className="border-white/20 bg-white/10 text-white placeholder:text-white/45"
               />
             </div>
             <div className="space-y-2">
@@ -79,15 +80,21 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 disabled={isLoading}
+                className="border-white/20 bg-white/10 text-white placeholder:text-white/45"
               />
             </div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full bg-violet-600 hover:bg-violet-500" disabled={isLoading}>
               {isLoading ? "Signing in..." : "Sign In"}
             </Button>
-            <p className="text-center text-sm text-gray-500">
+            <p className="text-center text-sm text-white/65">
               Don&apos;t have an account?{" "}
-              <Link href="/register" className="text-primary hover:underline font-medium">
+              <Link href="/register" className="font-medium text-violet-300 hover:underline">
                 Register
+              </Link>
+            </p>
+            <p className="text-center text-xs text-white/50">
+              <Link href="/" className="hover:underline">
+                Back to home
               </Link>
             </p>
           </form>

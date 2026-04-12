@@ -28,11 +28,9 @@ export function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  // Redirect root to dashboard or admin
-  if (pathname === "/") {
-    if (!token) return NextResponse.redirect(new URL("/login", request.url));
-    const dest = role === "ADMIN" ? "/admin" : "/dashboard";
-    return NextResponse.redirect(new URL(dest, request.url));
+  // Redirect admins away from user page
+  if (pathname.startsWith("/dashboard") && role === "ADMIN") {
+    return NextResponse.redirect(new URL("/admin", request.url));
   }
 
   return NextResponse.next();
