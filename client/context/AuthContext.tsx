@@ -15,33 +15,28 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUserState] = useState<StoredUser | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUserState] = useState<StoredUser | null>(() => getUser());
+  const [isLoading, setIsLoading] = useState<boolean>(() => {
+    const token = getToken();
+    if (!token) return false;
+    return !getUser();
+  });
 
   useEffect(() => {
     const token = getToken();
-    if (!token) {
-      setIsLoading(false);
-      return;
-    }
-    const storedUser = getUser();
-    if (storedUser) {
-      setUserState(storedUser);
-      setIsLoading(false);
-    } else {
-      getMe()
-        .then((u) => {
-          setUserState(u);
-          setUser(u);
-          Cookies.set("role", u.role, { expires: 7 });
-        })
-        .catch(() => {
-          removeToken();
-          removeUser();
-          Cookies.remove("role");
-        })
-        .finally(() => setIsLoading(false));
-    }
+    if (!token || getUser()) return;
+    getMe()
+      .then((u) => {
+        setUserState(u);
+        setUser(u);
+        Cookies.set("role", u.role, { expires: 7 });
+      })
+      .catch(() => {
+        removeToken();
+        removeUser();
+        Cookies.remove("role");
+      })
+      .finally(() => setIsLoading(false));
   }, []);
 
   const login = useCallback((token: string, userData: StoredUser) => {
