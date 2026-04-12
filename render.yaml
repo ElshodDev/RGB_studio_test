@@ -3,7 +3,7 @@ services:
     name: rgb-studio-server
     runtime: node
     rootDir: server
-    buildCommand: npm install && npx prisma generate --schema=prisma/schema.prisma && npm run build
+    buildCommand: npm install --include=dev && npx prisma generate --schema=prisma/schema.prisma && npm run build
     startCommand: node dist/main
     envVars:
       - key: DATABASE_URL
